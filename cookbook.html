@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recipe Vault · Squirrel Girl Curls</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #f472b6;
+    --pink-light: #fce7f3;
+    --pink-mid: #fbcfe8;
+    --pink-dark: #be185d;
+    --black: #0a0a0a;
+    --off-white: #fdf8f9;
+    --gray: #71717a;
+    --card-radius: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--black); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.15; }
+  a { text-decoration: none; color: inherit; }
+
+  nav { background: rgba(253,248,249,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--pink-mid); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; }
+  .nav-logo-icon { width: 38px; height: 38px; background: var(--black); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--pink); font-weight: 700; }
+  .nav-back { font-size: 13px; color: var(--gray); font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--black); }
+
+  .hero { padding: 60px 0 40px; text-align: center; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--pink-light); border: 1px solid var(--pink-mid); color: var(--pink-dark); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 16px; border-radius: 99px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(36px, 5vw, 56px); margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--pink-dark); }
+  .hero p { font-size: 17px; color: var(--gray); font-weight: 300; max-width: 500px; margin: 0 auto 36px; line-height: 1.75; }
+
+  .controls { max-width: 1100px; margin: 0 auto; padding: 0 24px 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .search-wrap { flex: 1; min-width: 200px; position: relative; }
+  .search-wrap input { width: 100%; background: #fff; border: 1.5px solid var(--pink-mid); border-radius: 99px; padding: 11px 20px 11px 44px; font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; color: var(--black); }
+  .search-wrap input:focus { border-color: var(--pink); }
+  .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; pointer-events: none; }
+  .filter-btn { background: #fff; border: 1.5px solid var(--pink-mid); border-radius: 99px; padding: 10px 18px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; color: var(--black); white-space: nowrap; }
+  .filter-btn:hover, .filter-btn.active { background: var(--black); color: #fff; border-color: var(--black); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+  .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+  .recipe-card { background: #fff; border-radius: var(--card-radius); border: 1px solid var(--pink-mid); overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+  .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(244,114,182,0.12); }
+  .recipe-img { height: 180px; background: var(--pink-light); display: flex; align-items: center; justify-content: center; font-size: 52px; position: relative; overflow: hidden; }
+  .recipe-img img { width: 100%; height: 100%; object-fit: cover; }
+  .recipe-category-badge { position: absolute; top: 12px; left: 12px; background: #fff; color: var(--pink-dark); font-size: 10px; font-weight: 500; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--pink-mid); }
+  .recipe-body { padding: 20px; }
+  .recipe-title { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 6px; }
+  .recipe-desc { font-size: 13px; color: var(--gray); font-weight: 300; line-height: 1.6; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .recipe-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .recipe-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray); font-weight: 300; }
+  .recipe-meta-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+  .macro-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .macro-pill { background: var(--pink-light); color: var(--pink-dark); font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 99px; }
+
+  .empty-state { text-align: center; padding: 80px 24px; }
+  .empty-icon { font-size: 48px; margin-bottom: 16px; }
+  .empty-state h3 { font-size: 22px; margin-bottom: 8px; }
+  .empty-state p { font-size: 14px; color: var(--gray); font-weight: 300; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.6); z-index: 200; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: #fff; border-radius: 28px; width: 100%; max-width: 680px; padding: 40px; position: relative; margin: auto; }
+  .modal-close { position: absolute; top: 20px; right: 20px; background: var(--off-white); border: 1px solid var(--pink-mid); border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .modal-close:hover { background: var(--pink-light); }
+  .modal-category { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink-dark); margin-bottom: 10px; }
+  .modal h2 { font-size: 30px; margin-bottom: 12px; }
+  .modal-desc { font-size: 15px; color: var(--gray); font-weight: 300; line-height: 1.75; margin-bottom: 20px; }
+  .modal-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--pink-mid); }
+  .modal-stat { text-align: center; }
+  .modal-stat-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--black); }
+  .modal-stat-label { font-size: 11px; color: var(--gray); font-weight: 300; }
+  .modal-macros { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .modal-macro { background: var(--pink-light); border-radius: 12px; padding: 12px 16px; text-align: center; }
+  .modal-macro-val { font-size: 18px; font-weight: 500; color: var(--pink-dark); }
+  .modal-macro-label { font-size: 11px; color: var(--pink-dark); font-weight: 300; }
+  .modal-section-title { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 14px; }
+  .modal-ingredients { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+  .modal-ingredients li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 300; color: var(--gray); }
+  .modal-ingredients li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+  .modal-steps { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .modal-step { display: flex; gap: 14px; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--black); color: #fff; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.75; }
+
+  .count-bar { max-width: 1100px; margin: 0 auto; padding: 0 24px 16px; font-size: 13px; color: var(--gray); font-weight: 300; }
+
+  footer { border-top: 1px solid var(--pink-mid); background: #fff; padding: 24px; text-align: center; font-size: 13px; color: var(--gray); font-weight: 300; }
+  footer a { color: var(--pink-dark); font-weight: 500; }
+
+  @media (max-width: 600px) {
+    .modal { padding: 28px 20px; border-radius: 20px; }
+    .recipes-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">SGC</div>
+      Squirrel Girl Curls
+    </a>
+    <a href="index.html#cookbook" class="nav-back">← Back to site</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">✦ Free for everyone</div>
+  <h1>The Recipe <em>Vault</em></h1>
+  <p>High-protein, macro-friendly recipes from Paige's kitchen. Real food that actually tastes good.</p>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search recipes..." oninput="filterRecipes()" />
+  </div>
+  <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+  <button class="filter-btn" onclick="setFilter('Breakfast', this)">Breakfast</button>
+  <button class="filter-btn" onclick="setFilter('Lunch', this)">Lunch</button>
+  <button class="filter-btn" onclick="setFilter('Dinner', this)">Dinner</button>
+  <button class="filter-btn" onclick="setFilter('Snacks & Treats', this)">Snacks</button>
+</div>
+
+<div class="container">
+  <div class="count-bar" id="countBar"></div>
+  <div class="recipes-grid" id="recipesGrid"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer>
+  Recipes by <a href="index.html">Paige Rosenberg · Squirrel Girl Curls</a> · Free for everyone
+</footer>
+
+<script>
+const STORAGE_KEY = 'sgc_recipes';
+let allRecipes = [];
+let activeFilter = 'all';
+
+const CATEGORY_EMOJI = {
+  'Breakfast': '🍳',
+  'Lunch': '🥗',
+  'Dinner': '🍽️',
+  'Snacks & Treats': '🍫',
+};
+
+function loadRecipes() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    allRecipes = raw ? JSON.parse(raw) : getSampleRecipes();
+  } catch { allRecipes = getSampleRecipes(); }
+  renderRecipes();
+}
+
+function getSampleRecipes() {
+  return [
+    {
+      id: 1,
+      title: 'Protein Pancakes',
+      category: 'Breakfast',
+      description: 'Fluffy, high-protein pancakes that taste indulgent but fit your macros perfectly.',
+      prepTime: '5 min', cookTime: '10 min', servings: 2,
+      calories: 320, protein: 28, carbs: 30, fat: 8,
+      ingredients: ['1 cup oats', '2 eggs', '1 scoop vanilla protein powder', '1/2 cup cottage cheese', '1 tsp baking powder', '1 tsp vanilla extract', 'Pinch of cinnamon'],
+      steps: ['Blend all ingredients until smooth.', 'Heat a non-stick pan over medium heat and spray with cooking spray.', 'Pour 1/4 cup batter per pancake, cook until bubbles form (~2 min), then flip.', 'Cook another 1-2 minutes until golden. Serve with fresh berries or sugar-free syrup.'],
+    },
+    {
+      id: 2,
+      title: 'Greek Chicken Bowl',
+      category: 'Lunch',
+      description: 'A fresh, filling bowl packed with lean protein and Mediterranean flavors.',
+      prepTime: '10 min', cookTime: '15 min', servings: 1,
+      calories: 480, protein: 45, carbs: 38, fat: 12,
+      ingredients: ['150g chicken breast', '1/2 cup cooked rice', '1/4 cucumber, diced', '1/4 cup cherry tomatoes', '2 tbsp hummus', '30g feta cheese', 'Lemon juice, olive oil, oregano'],
+      steps: ['Season chicken with oregano, salt, and pepper. Cook in a pan over medium-high heat 6-7 min per side.', 'Slice chicken and arrange over rice.', 'Add cucumber, tomatoes, and feta.', 'Top with hummus and a squeeze of lemon. Drizzle with a little olive oil.'],
+    },
+    {
+      id: 3,
+      title: 'Sheet Pan Salmon & Veg',
+      category: 'Dinner',
+      description: 'One pan, minimal cleanup, maximum macros. Ready in under 30 minutes.',
+      prepTime: '5 min', cookTime: '22 min', servings: 2,
+      calories: 520, protein: 42, carbs: 28, fat: 22,
+      ingredients: ['2 salmon fillets (150g each)', '1 cup broccoli florets', '1 cup cherry tomatoes', '1 zucchini, sliced', '2 tbsp olive oil', 'Garlic powder, paprika, salt, pepper', 'Lemon wedges to serve'],
+      steps: ['Preheat oven to 200°C (400°F). Line a sheet pan with foil.', 'Toss veggies with 1 tbsp olive oil and season. Spread on pan and roast 10 min.', 'Push veggies to the sides, add salmon. Drizzle salmon with remaining oil, season well.', 'Roast another 12-14 min until salmon flakes easily. Serve with lemon.'],
+    },
+    {
+      id: 4,
+      title: 'Chocolate Protein Balls',
+      category: 'Snacks & Treats',
+      description: 'No-bake, fudgy protein balls that satisfy chocolate cravings without blowing your macros.',
+      prepTime: '10 min', cookTime: '0 min', servings: 12,
+      calories: 95, protein: 6, carbs: 9, fat: 4,
+      ingredients: ['1 cup oats', '2 scoops chocolate protein powder', '3 tbsp peanut butter', '3 tbsp honey', '2 tbsp cocoa powder', '2-3 tbsp almond milk (to bind)'],
+      steps: ['Mix oats, protein powder, and cocoa powder in a bowl.', 'Add peanut butter and honey, mix well.', 'Add almond milk 1 tbsp at a time until dough holds together.', 'Roll into 12 balls. Refrigerate 30 min before eating. Store in fridge up to 5 days.'],
+    },
+  ];
+}
+
+function setFilter(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterRecipes();
+}
+
+function filterRecipes() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = allRecipes.filter(r => {
+    const matchCat = activeFilter === 'all' || r.category === activeFilter;
+    const matchQ = !q || r.title.toLowerCase().includes(q) || r.description.toLowerCase().includes(q) || (r.ingredients || []).some(i => i.toLowerCase().includes(q));
+    return matchCat && matchQ;
+  });
+  renderRecipes(filtered);
+}
+
+function renderRecipes(recipes) {
+  const list = recipes !== undefined ? recipes : allRecipes;
+  const grid = document.getElementById('recipesGrid');
+  const bar = document.getElementById('countBar');
+  bar.textContent = `${list.length} recipe${list.length !== 1 ? 's' : ''}`;
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🍽️</div><h3>No recipes yet</h3><p>Paige hasn't added any recipes here yet — check back soon!</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(r => `
+    <div class="recipe-card" onclick="openRecipe(${r.id})">
+      <div class="recipe-img">
+        ${r.imageUrl ? `<img src="${r.imageUrl}" alt="${r.title}" />` : `<span style="font-size:52px">${CATEGORY_EMOJI[r.category] || '🍽️'}</span>`}
+        <div class="recipe-category-badge">${r.category}</div>
+      </div>
+      <div class="recipe-body">
+        <div class="recipe-title">${r.title}</div>
+        <div class="recipe-desc">${r.description}</div>
+        <div class="recipe-meta">
+          ${r.prepTime ? `<div class="recipe-meta-item"><div class="recipe-meta-dot"></div>${r.prepTime} prep</div>` : ''}
+          ${r.cookTime ? `<div class="recipe-meta-item"><div class="recipe-meta-dot"></div>${r.cookTime} cook</div>` : ''}
+          ${r.servings ? `<div class="recipe-meta-item"><div class="recipe-meta-dot"></div>${r.servings} serving${r.servings > 1 ? 's' : ''}</div>` : ''}
+        </div>
+        ${r.protein ? `<div class="macro-pills"><span class="macro-pill">${r.protein}g protein</span>${r.calories ? `<span class="macro-pill">${r.calories} cal</span>` : ''}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function openRecipe(id) {
+  const r = allRecipes.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-category">${r.category}</div>
+    <h2>${r.title}</h2>
+    <p class="modal-desc">${r.description}</p>
+    <div class="modal-stats">
+      ${r.prepTime ? `<div class="modal-stat"><div class="modal-stat-val">${r.prepTime}</div><div class="modal-stat-label">Prep</div></div>` : ''}
+      ${r.cookTime ? `<div class="modal-stat"><div class="modal-stat-val">${r.cookTime}</div><div class="modal-stat-label">Cook</div></div>` : ''}
+      ${r.servings ? `<div class="modal-stat"><div class="modal-stat-val">${r.servings}</div><div class="modal-stat-label">Servings</div></div>` : ''}
+      ${r.calories ? `<div class="modal-stat"><div class="modal-stat-val">${r.calories}</div><div class="modal-stat-label">Calories</div></div>` : ''}
+    </div>
+    ${r.protein || r.carbs || r.fat ? `
+    <div class="modal-macros">
+      ${r.protein ? `<div class="modal-macro"><div class="modal-macro-val">${r.protein}g</div><div class="modal-macro-label">Protein</div></div>` : ''}
+      ${r.carbs ? `<div class="modal-macro"><div class="modal-macro-val">${r.carbs}g</div><div class="modal-macro-label">Carbs</div></div>` : ''}
+      ${r.fat ? `<div class="modal-macro"><div class="modal-macro-val">${r.fat}g</div><div class="modal-macro-label">Fat</div></div>` : ''}
+    </div>` : ''}
+    ${r.ingredients?.length ? `
+    <div class="modal-section-title">Ingredients</div>
+    <ul class="modal-ingredients">${r.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}
+    ${r.steps?.length ? `
+    <div class="modal-section-title">Instructions</div>
+    <ol class="modal-steps">${r.steps.map((s, i) => `<li class="modal-step"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></li>`).join('')}</ol>` : ''}
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+loadRecipes();
+</script>
+</body>
+</html>
