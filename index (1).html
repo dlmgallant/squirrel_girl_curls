@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Squirrel Girl Curls · Paige Rosenberg · Fitness Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #f472b6;
+    --pink-light: #fce7f3;
+    --pink-mid: #fbcfe8;
+    --pink-dark: #be185d;
+    --black: #0a0a0a;
+    --off-white: #fdf8f9;
+    --gray: #71717a;
+    --card-radius: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.15;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .fade-up-2 { animation: fadeUp 0.7s 0.15s ease both; }
+  .fade-up-3 { animation: fadeUp 0.7s 0.3s ease both; }
+  .fade-up-4 { animation: fadeUp 0.7s 0.45s ease both; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253, 248, 249, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--pink-mid);
+    padding: 16px 0;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-logo-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--black);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--pink);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .nav-logo-sub {
+    font-size: 11px;
+    color: var(--gray);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  .nav-cta {
+    background: var(--black);
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 99px;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: opacity 0.2s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.85 !important; }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--black);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 0;
+    border-top: 1px solid var(--pink-mid);
+    margin-top: 12px;
+  }
+
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a { font-size: 15px; font-weight: 500; padding: 4px 0; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -180px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #fce7f3 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--pink-light);
+    border: 1px solid var(--pink-mid);
+    color: var(--pink-dark);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 99px;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--pink);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 6vw, 68px);
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--pink-dark);
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: var(--gray);
+    line-height: 1.75;
+    max-width: 480px;
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .btn-primary {
+    background: var(--black);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--black);
+    padding: 14px 28px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1.5px solid var(--pink-mid);
+    transition: background 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-secondary:hover { background: var(--pink-light); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .hero-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .hero-card {
+    border-radius: var(--card-radius);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card-dark {
+    background: var(--black);
+    color: #fff;
+    grid-column: span 2;
+    padding: 32px;
+  }
+
+  .hero-card-dark .card-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 10px;
+  }
+
+  .hero-card-dark h3 {
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .hero-card-dark p {
+    font-size: 13px;
+    color: #d4d4d8;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .hero-card-photo {
+    background: var(--pink-light);
+    border: 2px dashed var(--pink-mid);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .photo-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--pink-mid);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .hero-card-photo p {
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 300;
+  }
+
+  .hero-card-pink {
+    background: var(--pink);
+    color: #fff;
+  }
+
+  .hero-card-pink .card-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+  }
+
+  .hero-card-pink h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .hero-card-pink p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero::before { display: none; }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 80px 0; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pink-dark);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--gray);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 48px;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: #fff; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .about-accs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .acc-card {
+    background: var(--off-white);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--pink-mid);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .acc-card:hover { transform: translateY(-3px); border-color: var(--pink); }
+
+  .acc-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .acc-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .acc-sub {
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 300;
+  }
+
+  .about-photo-placeholder {
+    background: var(--pink-light);
+    border-radius: var(--card-radius);
+    border: 2px dashed var(--pink-mid);
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+    padding: 32px;
+  }
+
+  .about-photo-placeholder .photo-icon { width: 60px; height: 60px; font-size: 28px; }
+
+  .about-photo-placeholder p {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 300;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .service-card {
+    background: #fff;
+    border-radius: var(--card-radius);
+    padding: 32px 28px;
+    border: 1px solid var(--pink-mid);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(244,114,182,0.15); }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-icon-wrap {
+    width: 52px;
+    height: 52px;
+    background: var(--pink-light);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .service-tag {
+    display: inline-block;
+    background: var(--pink-light);
+    color: var(--pink-dark);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+
+  @media (max-width: 768px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── CLIENT WINS ── */
+  .wins { background: var(--black); color: #fff; }
+
+  .wins .section-eyebrow { color: var(--pink); }
+  .wins .section-title { color: #fff; }
+  .wins .section-desc { color: #a1a1aa; }
+
+  .wins-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .win-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--card-radius);
+    padding: 28px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .win-card:hover {
+    background: rgba(244,114,182,0.08);
+    border-color: rgba(244,114,182,0.3);
+  }
+
+  .win-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 16px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .win-name { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+  .win-result { font-size: 12px; color: var(--pink); margin-bottom: 16px; font-weight: 500; }
+
+  .win-quote {
+    font-size: 14px;
+    color: #a1a1aa;
+    font-weight: 300;
+    line-height: 1.75;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .win-stars { color: var(--pink); font-size: 13px; letter-spacing: 2px; }
+
+  .wins-proof {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .proof-stat {
+    background: rgba(255,255,255,0.04);
+    padding: 36px;
+    text-align: center;
+  }
+
+  .proof-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--pink) 0%, #fff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .proof-label { font-size: 13px; color: #a1a1aa; font-weight: 300; margin-top: 6px; }
+
+  @media (max-width: 768px) {
+    .wins-grid { grid-template-columns: 1fr; }
+    .wins-proof { grid-template-columns: 1fr; }
+  }
+
+  /* ── COOKBOOK ── */
+  .cookbook { background: #fff; }
+
+  .cookbook-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .cookbook-feature {
+    background: var(--black);
+    border-radius: var(--card-radius);
+    padding: 48px 40px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cookbook-feature::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(244,114,182,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cookbook-feature .section-eyebrow { color: var(--pink); }
+  .cookbook-feature h2 { color: #fff; font-size: 32px; margin-bottom: 16px; }
+  .cookbook-feature p { font-size: 14px; color: #a1a1aa; font-weight: 300; line-height: 1.8; margin-bottom: 24px; }
+
+  .cookbook-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .cookbook-tag {
+    background: rgba(244,114,182,0.15);
+    color: var(--pink);
+    border: 1px solid rgba(244,114,182,0.3);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 99px;
+  }
+
+  .cookbook-lock {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-size: 13px;
+    color: #d4d4d8;
+    font-weight: 300;
+  }
+
+  .cookbook-categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .cookbook-cat {
+    background: var(--off-white);
+    border-radius: 18px;
+    padding: 22px 20px;
+    border: 1px solid var(--pink-mid);
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+
+  .cookbook-cat:hover { transform: translateY(-3px); border-color: var(--pink); }
+
+  .cookbook-cat-emoji { font-size: 24px; margin-bottom: 10px; }
+  .cookbook-cat-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .cookbook-cat-desc { font-size: 12px; color: var(--gray); font-weight: 300; line-height: 1.5; margin-bottom: 8px; }
+  .cookbook-cat-count { font-size: 11px; color: var(--pink-dark); font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .cookbook-layout { grid-template-columns: 1fr; }
+  }
+
+  /* ── PLANS ── */
+  .plans { background: var(--off-white); }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .plan-card {
+    background: #fff;
+    border-radius: var(--card-radius);
+    padding: 32px 28px;
+    border: 1.5px solid var(--pink-mid);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+  }
+
+  .plan-card:hover { transform: translateY(-4px); }
+
+  .plan-card.featured {
+    background: var(--black);
+    border-color: var(--black);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .plan-card.featured::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(244,114,182,0.2) 0%, transparent 70%);
+  }
+
+  .plan-badge {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+
+  .plan-name { font-size: 20px; margin-bottom: 8px; }
+  .plan-card.featured .plan-name { color: #fff; }
+
+  .plan-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .plan-card.featured .plan-price { color: var(--pink); }
+
+  .plan-period { font-size: 13px; color: var(--gray); font-weight: 300; margin-bottom: 16px; }
+  .plan-card.featured .plan-period { color: #a1a1aa; }
+
+  .plan-desc { font-size: 13px; color: var(--gray); font-weight: 300; line-height: 1.7; margin-bottom: 20px; }
+  .plan-card.featured .plan-desc { color: #a1a1aa; }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+    flex: 1;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 300;
+  }
+
+  .plan-card.featured .plan-features li { color: #d4d4d8; }
+
+  .plan-features li::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    border: 1.5px solid var(--pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23be185d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  .plan-card.featured .plan-features li::before {
+    background-color: rgba(244,114,182,0.2);
+    border-color: var(--pink);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23f472b6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  .plan-btn {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .plan-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .plan-card:not(.featured) .plan-btn {
+    background: var(--black);
+    color: #fff;
+  }
+
+  .plan-card.featured .plan-btn {
+    background: var(--pink);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .plans-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── FAQ ── */
+  .faq { background: #fff; }
+
+  .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 720px; }
+
+  .faq-item {
+    background: var(--off-white);
+    border: 1px solid var(--pink-mid);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .faq-item.open { border-color: var(--pink); }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 24px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--black);
+  }
+
+  .faq-chevron {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s, background 0.2s;
+    font-size: 12px;
+    color: var(--pink-dark);
+  }
+
+  .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--pink); color: #fff; }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.2s;
+    padding: 0 24px;
+    font-size: 14px;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--off-white); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .contact-info h2 { margin-bottom: 16px; }
+  .contact-info p { font-size: 15px; color: var(--gray); font-weight: 300; line-height: 1.8; margin-bottom: 28px; }
+
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid var(--pink-mid);
+    border-radius: 14px;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.2s;
+    margin-bottom: 20px;
+  }
+
+  .contact-email:hover { border-color: var(--pink); }
+
+  .contact-social {
+    background: var(--black);
+    border-radius: 20px;
+    padding: 24px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .contact-social-label { font-size: 11px; color: var(--pink); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .contact-social h4 { font-size: 16px; color: #fff; margin-bottom: 8px; }
+  .contact-social p { font-size: 13px; color: #a1a1aa; font-weight: 300; line-height: 1.6; margin-bottom: 12px; }
+  .contact-social a { color: var(--pink); font-size: 13px; font-weight: 500; }
+  .contact-social a:hover { text-decoration: underline; }
+
+  .contact-steps {
+    background: var(--pink-light);
+    border: 1px solid var(--pink-mid);
+    border-radius: 20px;
+    padding: 24px;
+  }
+
+  .contact-steps h4 { font-size: 15px; margin-bottom: 16px; }
+
+  .contact-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .step-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .contact-form {
+    background: #fff;
+    border-radius: var(--card-radius);
+    padding: 36px;
+    border: 1px solid var(--pink-mid);
+  }
+
+  .contact-form h3 { font-size: 22px; margin-bottom: 8px; }
+  .contact-form .form-sub { font-size: 13px; color: var(--gray); font-weight: 300; margin-bottom: 24px; }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: var(--off-white);
+    border: 1.5px solid var(--pink-mid);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--pink); }
+
+  .form-group textarea { resize: none; height: 110px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--black);
+    color: #fff;
+    border: none;
+    border-radius: 99px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 4px;
+  }
+
+  .form-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+  .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .form-note { font-size: 12px; color: var(--gray); font-weight: 300; text-align: center; margin-top: 10px; }
+
+  .form-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+    min-height: 280px;
+  }
+
+  .form-success.show { display: flex; }
+  .form-success-icon { font-size: 48px; }
+  .form-success h4 { font-size: 22px; }
+  .form-success p { font-size: 14px; color: var(--gray); font-weight: 300; max-width: 280px; }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: #fff;
+    padding: 40px 0 24px;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; }
+  .footer-tagline { font-size: 12px; color: #71717a; font-weight: 300; margin-top: 4px; }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a { font-size: 13px; color: #71717a; font-weight: 300; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--pink); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    font-size: 12px;
+    color: #52525b;
+    font-weight: 300;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo">
+        <div class="nav-logo-icon">SGC</div>
+        <div>
+          <div class="nav-logo-text">Squirrel Girl Curls</div>
+          <div class="nav-logo-sub">Paige Rosenberg · Fitness Coach</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#cookbook">Cookbook</a></li>
+        <li><a href="#plans">Plans</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact" class="nav-cta">Apply Now</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#results" onclick="closeMenu()">Results</a>
+      <a href="#cookbook" onclick="closeMenu()">Cookbook</a>
+      <a href="#plans" onclick="closeMenu()">Plans</a>
+      <a href="#faq" onclick="closeMenu()">FAQ</a>
+      <a href="#contact" onclick="closeMenu()" class="btn-primary" style="text-align:center;justify-content:center;">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow fade-up">
+          <div class="hero-eyebrow-dot"></div>
+          Fitness · Macros · Confidence
+        </div>
+        <h1 class="fade-up-2">
+          Strong Body.<br><em>Real Life</em><br>Habits.
+        </h1>
+        <p class="hero-desc fade-up-3">
+          Coaching by Paige Rosenberg — helping women build real confidence, improve fitness, and master nutrition without extremes, burnout, or confusion.
+        </p>
+        <div class="hero-btns fade-up-4">
+          <a href="#contact" class="btn-primary">Start Coaching →</a>
+          <a href="#plans" class="btn-secondary">View Plans</a>
+        </div>
+        <div class="hero-stats fade-up-4">
+          <div>
+            <div class="hero-stat-num">50+</div>
+            <div class="hero-stat-label">Women coached</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">4.9★</div>
+            <div class="hero-stat-label">Client rating</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">CrossFit</div>
+            <div class="hero-stat-label">Athlete & coach</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card hero-card-dark">
+          <div class="card-label">Coach Spotlight</div>
+          <h3>Competitive CrossFit Athlete</h3>
+          <p>Paige brings real competition experience, discipline, and a high-performance mindset into practical coaching for everyday women — wherever they're starting from.</p>
+        </div>
+        <div class="hero-card hero-card-photo">
+          <div class="photo-icon">📸</div>
+          <p>Replace with<br>Paige's photo</p>
+        </div>
+        <div class="hero-card hero-card-pink">
+          <div class="card-label">Signature Promise</div>
+          <h4>Macros made simple</h4>
+          <p>Clean structure, clear support, and coaching built for real life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-eyebrow">About Paige</p>
+        <h2 class="section-title">Strong coaching with a <em>feminine, confident edge.</em></h2>
+        <p>Squirrel Girl Curls is built around helping women feel stronger, more confident, and more in control of their routines. Paige combines years of CrossFit competition experience with an approachable, encouraging coaching style that makes fitness and nutrition actually feel achievable.</p>
+        <p>She's competed at a regional level, coached dozens of women across all experience levels, and built her methods around one core belief: <strong>sustainable always beats extreme.</strong></p>
+        <p>You can add her competition accomplishments, certifications, and media features here when ready.</p>
+        <div class="about-accs">
+          <div class="acc-card">
+            <div class="acc-icon">🏆</div>
+            <div class="acc-title">CrossFit Competitor</div>
+            <div class="acc-sub">Regional & local competitions</div>
+          </div>
+          <div class="acc-card">
+            <div class="acc-icon">⚡</div>
+            <div class="acc-title">Certified Coach</div>
+            <div class="acc-sub">Nutrition & strength training</div>
+          </div>
+          <div class="acc-card">
+            <div class="acc-icon">👥</div>
+            <div class="acc-title">50+ Clients</div>
+            <div class="acc-sub">Women of all fitness levels</div>
+          </div>
+          <div class="acc-card">
+            <div class="acc-icon">🥇</div>
+            <div class="acc-title">Podium Finishes</div>
+            <div class="acc-sub">Multiple competition placings</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-photo-placeholder">
+        <div class="photo-icon">📸</div>
+        <p>Replace with a brand photo of Paige</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <p class="section-eyebrow">Services</p>
+    <h2 class="section-title">How clients work with Paige.</h2>
+    <p class="section-desc">Every coaching package is built around your goals, your schedule, and your real life — not a one-size-fits-all template.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon-wrap">🏋️</div>
+        <h3>1:1 Fitness Coaching</h3>
+        <p>Custom programming built around your goals, training history, and lifestyle. Weekly check-ins, form feedback, and programming that adapts as you progress.</p>
+        <span class="service-tag">Weekly check-ins · Custom workouts</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">✨</div>
+        <h3>Macro Coaching</h3>
+        <p>Learn to fuel your body with confidence. Simple, flexible nutrition guidance that fits into your real life — no food rules, no restriction, just clarity.</p>
+        <span class="service-tag">Macro targets · Flexible eating</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">💬</div>
+        <h3>Accountability & Support</h3>
+        <p>Consistent check-ins, honest feedback, and real encouragement to keep you moving forward every single week. Direct messaging access included.</p>
+        <span class="service-tag">Direct messaging · Habit tracking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT WINS -->
+<section id="results" class="wins">
+  <div class="container">
+    <p class="section-eyebrow">Client Wins</p>
+    <h2 class="section-title">Real women, real results.</h2>
+    <p class="section-desc">Placeholder stories — swap these out with Paige's real client transformations when ready.</p>
+    <div class="wins-grid">
+      <div class="win-card">
+        <div class="win-avatar">S.M.</div>
+        <div class="win-name">Sarah M.</div>
+        <div class="win-result">↓ 18 lbs in 12 weeks · Macro Coaching</div>
+        <p class="win-quote">"I never thought tracking macros could feel this freeing. Paige made it click for me in a way no diet ever had. I finally feel in control."</p>
+        <div class="win-stars">★★★★★</div>
+      </div>
+      <div class="win-card">
+        <div class="win-avatar">J.T.</div>
+        <div class="win-name">Jamie T.</div>
+        <div class="win-result">First pull-up at 34 · 1:1 Fitness</div>
+        <p class="win-quote">"The programming was perfectly paced. I went from zero upper body strength to hitting my first pull-up in under 3 months. I actually cried."</p>
+        <div class="win-stars">★★★★★</div>
+      </div>
+      <div class="win-card">
+        <div class="win-avatar">M.L.</div>
+        <div class="win-name">Morgan L.</div>
+        <div class="win-result">Consistent for 6 months · Accountability</div>
+        <p class="win-quote">"I've tried every program out there. The difference with Paige is the support between sessions. She holds you accountable — in the nicest way."</p>
+        <div class="win-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="wins-proof">
+      <div class="proof-stat">
+        <div class="proof-num">50+</div>
+        <div class="proof-label">Women coached</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">4.9★</div>
+        <div class="proof-label">Average client rating</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">92%</div>
+        <div class="proof-label">Client retention rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COOKBOOK -->
+<section id="cookbook" class="cookbook">
+  <div class="container">
+    <div class="cookbook-layout">
+      <div class="cookbook-feature">
+        <p class="section-eyebrow">Recipe Vault</p>
+        <h2>Food that <em>actually</em> tastes good.</h2>
+        <p>High-protein, macro-friendly recipes that don't taste like cardboard. Real food that fuels performance, satisfies cravings, and fits your numbers. Full cookbook access included with coaching packages.</p>
+        <div class="cookbook-tags">
+          <span class="cookbook-tag">High Protein</span>
+          <span class="cookbook-tag">Macro Friendly</span>
+          <span class="cookbook-tag">Quick Prep</span>
+          <span class="cookbook-tag">Gluten-Free Options</span>
+        </div>
+        <div class="cookbook-lock">🔒 Full access included with coaching</div>
+      </div>
+      <div class="cookbook-categories">
+        <div class="cookbook-cat">
+          <div class="cookbook-cat-emoji">🍳</div>
+          <div class="cookbook-cat-name">High-Protein Breakfasts</div>
+          <div class="cookbook-cat-desc">Start your day fueled and ready.</div>
+          <div class="cookbook-cat-count">12 recipes</div>
+        </div>
+        <div class="cookbook-cat">
+          <div class="cookbook-cat-emoji">🥗</div>
+          <div class="cookbook-cat-name">Macro-Friendly Lunches</div>
+          <div class="cookbook-cat-desc">Quick, balanced midday meals.</div>
+          <div class="cookbook-cat-count">15 recipes</div>
+        </div>
+        <div class="cookbook-cat">
+          <div class="cookbook-cat-emoji">🍽️</div>
+          <div class="cookbook-cat-name">Easy Dinners</div>
+          <div class="cookbook-cat-desc">Family-friendly and hits your macros.</div>
+          <div class="cookbook-cat-count">18 recipes</div>
+        </div>
+        <div class="cookbook-cat">
+          <div class="cookbook-cat-emoji">🍫</div>
+          <div class="cookbook-cat-name">Snacks & Treats</div>
+          <div class="cookbook-cat-desc">High-protein snacks that satisfy.</div>
+          <div class="cookbook-cat-count">10 recipes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="plans" class="plans">
+  <div class="container">
+    <p class="section-eyebrow">Coaching Plans</p>
+    <h2 class="section-title">Choose your plan.</h2>
+    <p class="section-desc">All plans include a free 15-minute intro call. No commitment until you're ready.</p>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <h3 class="plan-name">Starter</h3>
+        <div class="plan-price">$___</div>
+        <div class="plan-period">/month</div>
+        <p class="plan-desc">Perfect for women who want personalized macro targets and a solid foundation to build from.</p>
+        <ul class="plan-features">
+          <li>Custom macro targets</li>
+          <li>Initial nutrition consult</li>
+          <li>Starter workout template</li>
+          <li>Email support</li>
+          <li>2 check-ins/month</li>
+        </ul>
+        <a href="#contact" class="plan-btn">Apply for Starter</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-badge">Most Popular</div>
+        <h3 class="plan-name">Signature</h3>
+        <div class="plan-price">$___</div>
+        <div class="plan-period">/month</div>
+        <p class="plan-desc">Paige's full 1:1 experience — programming, nutrition, and ongoing accountability in one package.</p>
+        <ul class="plan-features">
+          <li>Custom training program</li>
+          <li>Weekly macro adjustments</li>
+          <li>Unlimited check-ins</li>
+          <li>Direct messaging access</li>
+          <li>Monthly progress reviews</li>
+          <li>Full recipe vault access</li>
+        </ul>
+        <a href="#contact" class="plan-btn">Apply for Signature</a>
+      </div>
+      <div class="plan-card">
+        <h3 class="plan-name">VIP</h3>
+        <div class="plan-price">$___</div>
+        <div class="plan-period">/month</div>
+        <p class="plan-desc">Maximum support, maximum results. For women who want the full high-touch coaching experience.</p>
+        <ul class="plan-features">
+          <li>Everything in Signature</li>
+          <li>Priority response time</li>
+          <li>Video form reviews</li>
+          <li>Meal planning add-on</li>
+          <li>Quarterly strategy calls</li>
+        </ul>
+        <a href="#contact" class="plan-btn">Apply for VIP</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <div class="container">
+    <p class="section-eyebrow">FAQ</p>
+    <h2 class="section-title" style="margin-bottom:40px;">Common questions answered.</h2>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Who is this coaching for?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Hot Girl Macros is built for women who are tired of extreme diets, confusing programs, and going it alone. Whether you're a total beginner or you've been training for years, Paige meets you where you are and builds from there.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What does macro coaching actually include?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">You'll get personalized macro targets based on your body, goals, and lifestyle — not a generic calculator result. Paige teaches you how to hit your numbers flexibly, so you can eat out, enjoy life, and still make progress.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need gym access or special equipment?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Nope! Programs can be written for home, gym, or both. During your intake, Paige will ask about what equipment you have access to and build your plan around it.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long before I see results?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Most clients notice changes in energy, consistency, and confidence within the first 2–3 weeks. Physical results vary by person, but clients who follow the plan and stay consistent typically see meaningful progress within 4–8 weeks.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do I get started?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Fill out the application form below or email Paige directly. She personally reviews every application and responds within 48 hours to schedule a free intro call — no commitment required.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-eyebrow">Contact</p>
+        <h2 class="section-title">Ready to work with Paige?</h2>
+        <p>Fill out the form or reach out directly. Paige personally reviews every application and responds within 48 hours.</p>
+        <a href="mailto:paigemackenzzie@hotmail.com" class="contact-email">
+          ✉️ paigemackenzzie@hotmail.com
+        </a>
+        <div class="contact-social">
+          <div class="contact-social-label">Follow on Instagram</div>
+          <h4>@squirrel_girl_curls</h4>
+          <p>Behind-the-scenes workouts, macro tips, transformation reels, and daily coaching content.</p>
+          <a href="https://instagram.com/squirrel_girl_curls" target="_blank" rel="noopener">→ Visit Instagram</a>
+        </div>
+        <div class="contact-steps">
+          <h4>What happens after you apply?</h4>
+          <div class="contact-step"><div class="step-num">1</div><div>Paige reviews your application within 48 hours</div></div>
+          <div class="contact-step"><div class="step-num">2</div><div>You'll get an email to book a free intro call</div></div>
+          <div class="contact-step"><div class="step-num">3</div><div>On the call, you'll talk goals, questions, and fit</div></div>
+          <div class="contact-step"><div class="step-num">4</div><div>If it's a match, you'll receive your onboarding kit</div></div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div id="formContent">
+          <h3>Apply for coaching</h3>
+          <p class="form-sub">Takes 2 minutes. Free intro call included.</p>
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Your email" required />
+            </div>
+            <div class="form-group">
+              <input type="text" name="goal" placeholder="Your main goal (e.g. lose fat, build strength)" />
+            </div>
+            <div class="form-group">
+              <textarea name="message" placeholder="Tell Paige about yourself — your current routine, struggles, and what kind of support you're looking for"></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">Send Application →</button>
+            <p class="form-note">Free intro call included with every application</p>
+          </form>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">🎉</div>
+          <h4>Application received!</h4>
+          <p>Paige will reach out within 48 hours to schedule your free intro call.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">Squirrel Girl Curls</div>
+          <div class="footer-tagline">Paige Rosenberg · Fitness & Macro Coaching</div>
+        </div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#results">Results</a>
+          <a href="#cookbook">Cookbook</a>
+          <a href="#plans">Plans</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Squirrel Girl Curls · Paige Rosenberg</span>
+        <span>Fitness Coaching · Macro Coaching · Confidence</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function toggleMenu() {
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('navMobile').classList.remove('open');
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const ENDPOINT = '';
+
+    if (!ENDPOINT) {
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    const data = Object.fromEntries(new FormData(e.target));
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Something went wrong — try emailing directly';
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Something went wrong — try emailing directly';
+    }
+  }
+</script>
+</body>
+</html>
