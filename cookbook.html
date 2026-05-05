@@ -97,6 +97,24 @@
   footer { border-top: 1px solid var(--pink-mid); background: #fff; padding: 24px; text-align: center; font-size: 13px; color: var(--gray); font-weight: 300; }
   footer a { color: var(--pink-dark); font-weight: 500; }
 
+  /* PASSWORD GATE */
+  .gate-overlay { position: fixed; inset: 0; background: rgba(253,248,249,0.98); backdrop-filter: blur(12px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .gate-box { background: #fff; border-radius: 28px; border: 1.5px solid var(--pink-mid); padding: 48px 40px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 8px 48px rgba(244,114,182,0.12); }
+  .gate-icon { font-size: 48px; margin-bottom: 20px; }
+  .gate-box h2 { font-size: 28px; margin-bottom: 10px; }
+  .gate-box h2 em { font-style: italic; color: var(--pink-dark); }
+  .gate-box p { font-size: 14px; color: var(--gray); font-weight: 300; line-height: 1.75; margin-bottom: 28px; }
+  .gate-input { width: 100%; background: var(--off-white); border: 1.5px solid var(--pink-mid); border-radius: 14px; padding: 14px 18px; font-size: 15px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; text-align: center; letter-spacing: 0.1em; color: var(--black); margin-bottom: 12px; }
+  .gate-input:focus { border-color: var(--pink); }
+  .gate-btn { width: 100%; background: var(--black); color: #fff; border: none; border-radius: 99px; padding: 15px; font-size: 15px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; margin-bottom: 16px; }
+  .gate-btn:hover { opacity: 0.85; }
+  .gate-error { font-size: 13px; color: #ef4444; display: none; margin-bottom: 12px; }
+  .gate-error.show { display: block; }
+  .gate-subscribe { font-size: 13px; color: var(--gray); font-weight: 300; }
+  .gate-subscribe a { color: var(--pink-dark); font-weight: 500; }
+  .gate-box.shake { animation: shake 0.4s ease; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }
+
   @media (max-width: 600px) {
     .modal { padding: 28px 20px; border-radius: 20px; }
     .recipes-grid { grid-template-columns: 1fr; }
@@ -146,13 +164,60 @@
 </div>
 
 <footer>
-  Recipes by <a href="index.html">Paige Rosenberg · Squirrel Girl Curls</a> · Free for everyone
+  Recipes by <a href="index.html">Paige Rosenberg · Hot Girl Macros</a> · $2.99/month subscription
+  <div style="margin-top:12px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+    <span style="font-size:11px;color:#a1a1aa;font-weight:300;">Built by <a href="https://discord.com/users/306435808355811330" target="_blank" rel="noopener" style="color:#be185d;font-weight:500;">@danimalcollects</a></span>
+    <a href="https://discord.com/users/306435808355811330" target="_blank" rel="noopener" style="font-size:11px;color:#a1a1aa;background:#fce7f3;border:1px solid #fbcfe8;border-radius:99px;padding:5px 12px;text-decoration:none;">🐛 Report a bug</a>
+    <a href="https://discord.com/users/306435808355811330" target="_blank" rel="noopener" style="font-size:11px;color:#a1a1aa;background:#fce7f3;border:1px solid #fbcfe8;border-radius:99px;padding:5px 12px;text-decoration:none;">💬 Give feedback</a>
+  </div>
 </footer>
+
+<!-- PASSWORD GATE -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box" id="gateBox">
+    <div class="gate-icon">🔒</div>
+    <h2>The Recipe <em>Vault</em></h2>
+    <p>Get access to all of Paige's high-protein, macro-friendly recipes for just $2.99/month. Already subscribed? Enter your password below.</p>
+    <input class="gate-input" type="password" id="gatePw" placeholder="Enter your password..." onkeydown="if(event.key==='Enter')checkPassword()" />
+    <div class="gate-error" id="gateError">Wrong password — check your email from Paige 💌</div>
+    <button class="gate-btn" onclick="checkPassword()">Access Recipes →</button>
+    <div class="gate-subscribe">Not subscribed yet? <a href="mailto:paigemackenzzie@hotmail.com?subject=Recipe Vault Subscription&body=Hi Paige! I'd like to subscribe to the Recipe Vault for $2.99/month.">Email Paige to subscribe →</a></div>
+  </div>
+</div>
 
 <script>
 const STORAGE_KEY = 'sgc_recipes';
+const COOKBOOK_PW = 'hotgirlrecipes'; // Paige: change this to whatever you want!
+const ACCESS_KEY = 'hgm_cookbook_access';
+
 let allRecipes = [];
 let activeFilter = 'all';
+
+// Check if already unlocked
+function checkAccess() {
+  if (localStorage.getItem(ACCESS_KEY) === 'true') {
+    document.getElementById('gateOverlay').style.display = 'none';
+    loadRecipes();
+  }
+}
+
+function checkPassword() {
+  const pw = document.getElementById('gatePw').value;
+  const err = document.getElementById('gateError');
+  const box = document.getElementById('gateBox');
+  if (pw === COOKBOOK_PW) {
+    localStorage.setItem(ACCESS_KEY, 'true');
+    document.getElementById('gateOverlay').style.display = 'none';
+    loadRecipes();
+  } else {
+    err.classList.add('show');
+    box.classList.remove('shake');
+    void box.offsetWidth;
+    box.classList.add('shake');
+    document.getElementById('gatePw').value = '';
+    setTimeout(() => err.classList.remove('show'), 3000);
+  }
+}
 
 const CATEGORY_EMOJI = {
   'Breakfast': '🍳',
@@ -303,7 +368,7 @@ function closeModalOutside(e) {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-loadRecipes();
+checkAccess();
 </script>
 </body>
 </html>
