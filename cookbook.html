@@ -172,39 +172,59 @@
   </div>
 </footer>
 
+<!-- USER BAR shown when logged in via portal -->
+<div id="gateUserBar" style="display:none;background:var(--pink-light);border-bottom:1px solid var(--pink-mid);padding:10px 24px;font-size:13px;color:var(--pink-dark);font-weight:500;align-items:center;justify-content:space-between;">
+  <span>👋 Welcome back, <strong id="gateUserName"></strong>! Enjoy the recipes.</span>
+  <a href="portal.html" style="font-size:12px;color:var(--pink-dark);">← Back to portal</a>
+</div>
+
 <!-- PASSWORD GATE -->
 <div class="gate-overlay" id="gateOverlay">
   <div class="gate-box" id="gateBox">
     <div class="gate-icon">🔒</div>
     <h2>The Recipe <em>Vault</em></h2>
-    <p>Get access to all of Paige's high-protein, macro-friendly recipes for just $2.99/month. Already subscribed? Enter your password below.</p>
-    <input class="gate-input" type="password" id="gatePw" placeholder="Enter your password..." onkeydown="if(event.key==='Enter')checkPassword()" />
+    <p>The Recipe Vault is for Hot Girl Macros clients. Sign into your client portal, or subscribe for $2.99/month for cookbook-only access.</p>
+    <a href="portal.html" style="display:block;background:var(--black);color:#fff;border-radius:99px;padding:14px;font-size:14px;font-weight:500;text-align:center;margin-bottom:16px;text-decoration:none;">Sign in to Client Portal →</a>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="flex:1;height:1px;background:var(--pink-mid);"></div>
+      <span style="font-size:11px;color:var(--gray);font-weight:300;">or $2.99/month subscriber</span>
+      <div style="flex:1;height:1px;background:var(--pink-mid);"></div>
+    </div>
+    <input class="gate-input" type="password" id="gatePw" placeholder="Enter subscriber password..." onkeydown="if(event.key==='Enter')checkPassword()" />
     <div class="gate-error" id="gateError">Wrong password — check your email from Paige 💌</div>
-    <button class="gate-btn" onclick="checkPassword()">Access Recipes →</button>
-    <div class="gate-subscribe">Not subscribed yet? <a href="mailto:paigemackenzzie@hotmail.com?subject=Recipe Vault Subscription&body=Hi Paige! I'd like to subscribe to the Recipe Vault for $2.99/month.">Email Paige to subscribe →</a></div>
+    <button class="gate-btn" onclick="checkPassword()" style="margin-top:10px;">Access Recipes →</button>
+    <div class="gate-subscribe" style="margin-top:16px;">Want cookbook-only access? <a href="https://buy.stripe.com/fZucN75HNbId2UQb1638400" target="_blank" rel="noopener">Subscribe for $2.99/month →</a></div>
   </div>
 </div>
 
 <script>
 const STORAGE_KEY = 'sgc_recipes';
-const COOKBOOK_PW = 'hotgirlrecipes'; // Paige: change this to whatever you want!
-const ACCESS_KEY = 'hgm_cookbook_access';
+const SESSION_KEY = 'hgm_portal_session'; // shared with portal.html
+const ACCESS_KEY  = 'hgm_cookbook_access';
 
 let allRecipes = [];
 let activeFilter = 'all';
 
-// Check if already unlocked
 function checkAccess() {
-  if (localStorage.getItem(ACCESS_KEY) === 'true') {
+  // Unlock if logged into portal OR has standalone cookbook access
+  const portalSession = localStorage.getItem(SESSION_KEY);
+  const standaloneAccess = localStorage.getItem(ACCESS_KEY) === 'true';
+  if (portalSession || standaloneAccess) {
     document.getElementById('gateOverlay').style.display = 'none';
+    // Show logged in user name if available
+    if (portalSession) {
+      document.getElementById('gateUserName').textContent = portalSession;
+      document.getElementById('gateUserBar').style.display = 'flex';
+    }
     loadRecipes();
   }
 }
 
 function checkPassword() {
-  const pw = document.getElementById('gatePw').value;
+  const pw  = document.getElementById('gatePw').value;
   const err = document.getElementById('gateError');
   const box = document.getElementById('gateBox');
+  const COOKBOOK_PW = 'hotgirlrecipes';
   if (pw === COOKBOOK_PW) {
     localStorage.setItem(ACCESS_KEY, 'true');
     document.getElementById('gateOverlay').style.display = 'none';
